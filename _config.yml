@@ -98,8 +98,8 @@ comments:
   giscus:
     repo: mohammadabidhafiz1294/blog.mohammadabidhafiz1294.github.io
     repo_id: R_kgDOLatjOA
-    category: General
-    category_id: DIC_kwDOLatjOM4CeVWW
+    category: Comments
+    category_id: DIC_kwDOLatjOM4CeVZY
     mapping: pathname # optional, default to 'pathname'
     input_position: bottom # optional, default to 'bottom'
     lang: site.lang # optional, default to the value of `site.lang`
