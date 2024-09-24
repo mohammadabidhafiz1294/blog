@@ -96,7 +96,7 @@ comments:
     issue_term: # < url | pathname | title | ...>
   # Giscus options › https://giscus.app
   giscus:
-    repo: mohammadabidhafiz1294/blog.mohammadabidhafiz1294.github.io
+    repo: mohammadabidhafiz1294/blog
     repo_id: R_kgDOLatjOA
     category: Comments
     category_id: DIC_kwDOLatjOM4CeVZY
