@@ -692,8 +692,8 @@ mjx-container {
 /* --- sidebar layout --- */
 
 $sidebar-display: 'sidebar-display';
-$btn-border-width: 3px;
-$btn-mb: 0.5rem;
+$btn-border-width: 6px;
+$btn-mb: 0.6rem;
 
 #sidebar {
   @include pl-pr(0);
@@ -887,8 +887,9 @@ $btn-mb: 0.5rem;
       content: '';
       width: $btn-border-width;
       height: $btn-border-width;
-      border-radius: 50%;
+      border-radius: 30%;
       margin-bottom: $btn-mb;
+      display: inline-block; /* Ensure the span behaves like an inline-block element */
     }
   } /* .sidebar-bottom */
 } /* #sidebar */
