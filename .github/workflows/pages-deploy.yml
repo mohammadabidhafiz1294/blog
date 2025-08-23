@@ -65,6 +65,7 @@ jobs:
         uses: juliangruber/merge-pull-request-action@v1
         with:
           github-token: ${{ secrets.blog_repo_action_tokens }}
+          number: ${{ github.event.pull_request.number }}
           method: squash
 
   deploy:
