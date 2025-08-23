@@ -23,7 +23,7 @@ description: >- # used by seo meta and the atom feed
 
 # Fill in the protocol & hostname for your site.
 # e.g. 'https://username.github.io', note that it does not end with a '/'.
-url: "https://mohammadabidhafiz1294.github.io" # the base hostname & protocol for your site
+url: "https://mohammadabidhafiz1294.github.io/blog" # the base hostname & protocol for your site
 
 github:
   username: mohammadabidhafiz1294 # change to your github username
@@ -108,7 +108,7 @@ comments:
     category_id: DIC_kwDOLatjOM4CeVZY
     mapping: pathname # optional, default to 'pathname'
     input_position: bottom # optional, default to 'bottom'
-    lang: site.lang # optional, default to the value of `site.lang`
+    lang: en # optional, default to the value of `site.lang`
     reactions_enabled: 1 # optional, default to the value of `1`
 
 # Self-hosted static assets, optional › https://github.com/cotes2020/chirpy-static-assets
