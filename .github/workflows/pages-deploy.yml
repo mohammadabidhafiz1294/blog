@@ -72,7 +72,7 @@ jobs:
           base: main
 
       - name: Enable Pull Request Automerge
-        # if: success() && steps.cpr.outputs.pull-request-number != ''
+        if: success() && steps.cpr.outputs.pull-request-number != ''
         uses: peter-evans/enable-pull-request-automerge@v3
         with:
           token: ${{ secrets.BLOG_REPO_ACTION_TOKENS }}
