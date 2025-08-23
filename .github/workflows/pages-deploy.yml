@@ -52,20 +52,13 @@ jobs:
         with:
           path: "_site${{ steps.pages.outputs.base_path }}"
 
-  create-pull-request:
-    if: github.ref != 'refs/heads/main'
-    needs: build-and-test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
       - name: Create Pull Request to main
         id: cpr
         uses: peter-evans/create-pull-request@v6
         with:
-          branch: ${{ github.head_ref }}
+          branch: ${{ github.head_ref || github.ref_name }}
           base: main
-          title: "Automated PR: ${{ github.head_ref }} to main"
+          title: "Automated PR: ${{ github.head_ref || github.ref_name }} to main"
           body: "This PR was created automatically after successful build and test."
           delete-branch: false
       - name: Auto-merge PR
