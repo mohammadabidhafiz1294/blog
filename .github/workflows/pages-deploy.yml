@@ -21,7 +21,6 @@ permissions:
   pages: write
   id-token: write
 
-# Allow one concurrent deployment
 concurrency:
   group: "pages"
   cancel-in-progress: true
@@ -49,8 +48,6 @@ jobs:
       - name: Test site
         run: |
           bundle exec htmlproofer _site \
-            --disable-external=true \
-            --ignore-urls "/^http:\/\/127.0.0.1/,/^http:\/\/0.0.0.0/,/^http:\/\/localhost/"
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -60,17 +57,19 @@ jobs:
         id: cpr
         uses: peter-evans/create-pull-request@v6
         with:
+          token: ${{ secrets.BLOG_REPO_ACTION_TOKENS }}
           branch: ${{ github.head_ref || github.ref_name }}
           base: main
           title: "Automated PR: ${{ github.head_ref || github.ref_name }} to main"
           body: "This PR was created automatically after successful build and test."
           delete-branch: false
+          labels: automerge
+
       - name: Auto-merge PR
         uses: reitermarkus/automerge@v2
         with:
-          token: ${{ secrets.blog_repo_action_tokens }}
-          pull-request: ${{ github.event.inputs.pull-request }}
-          do-not-merge-labels: never-merge
+          token: ${{ secrets.BLOG_REPO_ACTION_TOKENS }}
+          pull-request: ${{ steps.cpr.outputs.pull-request-number }}
           merge-method: rebase
           required-labels: automerge
 
