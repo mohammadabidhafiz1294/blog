@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - candidate
+      - main # Add main to trigger build on push to main
     paths-ignore:
       - .gitignore
       - README.md
@@ -11,8 +12,6 @@ on:
     types:
       - labeled
       - synchronize
-      - reopened
-      - ready_for_review
     branches:
       - main
   workflow_dispatch:
@@ -23,7 +22,6 @@ permissions:
   pages: write
   id-token: write
 
-# Allow one concurrent deployment
 concurrency:
   group: "pages"
   cancel-in-progress: true
@@ -58,24 +56,24 @@ jobs:
         with:
           path: "_site${{ steps.pages.outputs.base_path }}"
 
-      - name: Create Pull Request to main
+      - name: Create Pull Request
+        # if: github.ref == 'refs/heads/candidate' && github.event_name == 'push' # Add condition
         id: cpr
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@v3
         with:
-          branch: ${{ github.head_ref || github.ref_name }}
-          base: main
-          title: "Automated PR: ${{ github.head_ref || github.ref_name }} to main"
-          body: "This PR was created automatically after successful build and test."
-          delete-branch: false
-      - name: Auto-merge PR
-        uses: juliangruber/merge-pull-request-action@v1
+          token: ${{ secrets.BLOG_REPO_ACTION_TOKENS }}
+          base: main # Explicitly set target branch
+
+      - name: Enable Pull Request Automerge
+        if: steps.cpr.outputs.pull-request-operation == 'created'
+        uses: peter-evans/enable-pull-request-automerge@v3
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          number: ${{ github.event.pull_request.number }}
-          method: squash
+          token: ${{ secrets.BLOG_REPO_ACTION_TOKENS }}
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+          merge-method: squash
 
   deploy:
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' # This now works since build runs on main
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
