@@ -66,12 +66,11 @@ jobs:
           body: "This PR was created automatically after successful build and test."
           delete-branch: false
       - name: Auto-merge PR
-        if: steps.cpr.outputs.pull-request-number == ''
-        uses: juliangruber/merge-pull-request-action@v1
+        uses: reitermarkus/automerge@v2
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          number: ${{ steps.cpr.outputs.pull-request-number }}
-          method: squash
+          token: ${{ secrets.blog_repo_action_tokens }}
+          pull-request: ${{ github.event.inputs.pull-request }}
+          merge-method: rebase
 
   deploy:
     if: github.ref == 'refs/heads/main'
