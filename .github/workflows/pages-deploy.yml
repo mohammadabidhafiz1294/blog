@@ -68,8 +68,9 @@ jobs:
           commit-message: "Build and test site"
           title: "Site updates from candidate branch"
           body: "Automated PR from candidate branch"
-          base: candidate
-          branch: "main"
+          base: main
+          head: candidate
+          branch: candidate
 
       - name: Enable Pull Request Automerge
         # if: success() && steps.cpr.outputs.pull-request-number != ''
