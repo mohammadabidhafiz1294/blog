@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - candidate
+      - main # Add main to trigger build on push to main
     paths-ignore:
       - .gitignore
       - README.md
@@ -56,10 +57,12 @@ jobs:
           path: "_site${{ steps.pages.outputs.base_path }}"
 
       - name: Create Pull Request
+        if: github.ref == 'refs/heads/candidate' && github.event_name == 'push' # Add condition
         id: cpr
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.BLOG_REPO_ACTION_TOKENS }}
+          base: main # Explicitly set target branch
 
       - name: Enable Pull Request Automerge
         if: steps.cpr.outputs.pull-request-operation == 'created'
@@ -70,7 +73,7 @@ jobs:
           merge-method: squash
 
   deploy:
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' # This now works since build runs on main
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
