@@ -69,7 +69,6 @@ jobs:
           title: "Site updates from candidate branch"
           body: "Automated PR from candidate branch"
           base: main
-          head: candidate
           branch: candidate
 
       - name: Enable Pull Request Automerge
