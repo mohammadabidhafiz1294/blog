@@ -65,7 +65,7 @@ jobs:
           base: main # Explicitly set target branch
 
       - name: Enable Pull Request Automerge
-        if: steps.cpr.outputs.pull-request-operation == 'created'
+        # if: steps.cpr.outputs.pull-request-operation == 'created'
         uses: peter-evans/enable-pull-request-automerge@v3
         with:
           token: ${{ secrets.BLOG_REPO_ACTION_TOKENS }}
