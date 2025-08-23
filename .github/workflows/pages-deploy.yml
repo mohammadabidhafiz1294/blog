@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - candidate
+      - main # Add main to trigger build on push to main
     paths-ignore:
       - .gitignore
       - README.md
@@ -79,7 +80,7 @@ jobs:
           merge-method: squash
 
   deploy:
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' # This now works since build runs on main
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
