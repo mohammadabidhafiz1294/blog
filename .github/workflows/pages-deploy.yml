@@ -70,7 +70,9 @@ jobs:
         with:
           token: ${{ secrets.blog_repo_action_tokens }}
           pull-request: ${{ github.event.inputs.pull-request }}
+          do-not-merge-labels: never-merge
           merge-method: rebase
+          required-labels: automerge
 
   deploy:
     if: github.ref == 'refs/heads/main'
