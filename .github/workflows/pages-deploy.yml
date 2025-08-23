@@ -45,10 +45,9 @@ jobs:
           bundler-cache: true
 
       - name: Build site
-        run: bundle exec jekyll b -d "_site"
+        run: bundle exec jekyll b -d "_site${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: "production"
-          JEKYLL_BASE_URL: ${{ steps.pages.outputs.base_path }}
 
       - name: Test site
         run: |
