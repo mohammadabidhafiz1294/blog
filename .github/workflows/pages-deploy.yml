@@ -11,8 +11,6 @@ on:
     types:
       - labeled
       - synchronize
-      - reopened
-      - ready_for_review
     branches:
       - main
   workflow_dispatch:
