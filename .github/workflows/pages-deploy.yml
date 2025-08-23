@@ -68,7 +68,7 @@ jobs:
           commit-message: "Build and test site"
           title: "Site updates from candidate branch"
           body: "Automated PR from candidate branch"
-          base: main
+          base: candidate
           branch: "main"
 
       - name: Enable Pull Request Automerge
