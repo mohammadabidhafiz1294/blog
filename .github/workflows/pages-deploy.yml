@@ -57,7 +57,7 @@ jobs:
           path: "_site${{ steps.pages.outputs.base_path }}"
 
       - name: Create Pull Request
-        if: github.ref == 'refs/heads/candidate' && github.event_name == 'push' # Add condition
+        # if: github.ref == 'refs/heads/candidate' && github.event_name == 'push' # Add condition
         id: cpr
         uses: peter-evans/create-pull-request@v3
         with:
