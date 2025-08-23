@@ -2,23 +2,30 @@ name: "Build, Test, and Deploy"
 on:
   push:
     branches:
+<<<<<<< HEAD
       - candidate
       - main # Add main to trigger build on push to main
+=======
+      - main
+>>>>>>> c3d6ca9 (fix: update workflow to trigger on main branch and adjust permissions)
     paths-ignore:
       - .gitignore
       - README.md
       - LICENSE
+<<<<<<< HEAD
   pull_request:
     types:
       - labeled
       - synchronize
     branches:
       - main
+=======
+
+>>>>>>> c3d6ca9 (fix: update workflow to trigger on main branch and adjust permissions)
   workflow_dispatch:
 
 permissions:
-  pull-requests: write
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
@@ -60,6 +67,7 @@ jobs:
         with:
           path: "_site${{ steps.pages.outputs.base_path }}"
 
+<<<<<<< HEAD
       - name: Create Pull Request
         if: github.ref == 'refs/heads/candidate'
         id: cpr
@@ -81,6 +89,9 @@ jobs:
 
   deploy:
     if: github.ref == 'refs/heads/main' # This now works since build runs on main
+=======
+  deploy:
+>>>>>>> c3d6ca9 (fix: update workflow to trigger on main branch and adjust permissions)
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
