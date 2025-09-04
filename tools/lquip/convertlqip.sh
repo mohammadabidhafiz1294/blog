@@ -3,6 +3,34 @@
 INPUT_DIRS=("assets/img/headers" "assets/img/posts")
 CSV_PATH="assets/img/image_data.csv"
 
+# Function to look up a data URL by basename
+lookup_data_url() {
+  local basename="$1"
+  if [ ! -f "$CSV_PATH" ]; then
+    echo "Error: CSV file not found at $CSV_PATH"
+    exit 1
+  fi
+  
+  # Skip header line and search for basename
+  # Using cut with delimiter "," to extract the 3rd field
+  # This is more reliable for handling large base64 strings
+  result=$(grep "\"$basename\"" "$CSV_PATH" | head -1)
+  if [ -n "$result" ]; then
+    # Extract and print the full data URL (third column)
+    # Parse CSV properly to handle quotes
+    echo "$result" | awk -F '",' '{print $3}' | sed 's/^"//;s/"$//'
+  else
+    echo "Error: No entry found for basename: $basename"
+    exit 1
+  fi
+}
+
+# Check if we're looking up a specific basename
+if [ "$1" = "-l" ] && [ -n "$2" ]; then
+  lookup_data_url "$2"
+  exit 0
+fi
+
 echo "name,webp_path,base64" > "$CSV_PATH"
 
 # Find all jpg, jpeg, and webp images in all subdirectories
