@@ -1,0 +1,23 @@
+{
+  "Jekyll Post Template": {
+    "scope": "markdown",
+    "prefix": "jekyllpost",
+    "body": [
+      "---",
+      "title: \"$1\"",
+      "date: $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE",
+      "categories: [$2]",
+      "tags: [$3]",
+	  "<author_id>:",
+    	"name: Mohammad Abid Hafiz",
+    	"url: https://mohammadabidhafiz1294.github.io",
+	  "image:",
+        "path: /assets/images/2025/",
+      	"alt: Image description",
+			"lqip:",
+
+      "---"
+    ],
+    "description": "Jekyll markdown post template"
+  }
+}
